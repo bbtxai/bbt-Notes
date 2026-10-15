@@ -228,7 +228,7 @@ transferRoutes.post('/import', async (c) => {
           include: isBackupControlPath,
         })
         strictBackup = controls.some((entry) =>
-          isMarkdownBackupControlPath(entry.path) || isbbt-notesBackupManifest(entry),
+          isMarkdownBackupControlPath(entry.path) || isBbtaiBackupManifest(entry),
         )
         const backup = await selectCompleteZipBackup(controls)
         if (strictBackup && !backup) {
@@ -1692,7 +1692,7 @@ function isMarkdownBackupControlPath(path: string): boolean {
   return /(?:^|\/)snapshots\/\d{8}-\d{6}-\d{3}\/(?:manifest\.json|complete|readme\.txt)$/i.test(path)
 }
 
-function isbbt-notesBackupManifest(entry: UnzippedEntry): boolean {
+function isBbtaiBackupManifest(entry: UnzippedEntry): boolean {
   if (!/(?:^|\/)manifest\.json$/i.test(entry.path)) return false
   try {
     const raw = JSON.parse(new TextDecoder().decode(entry.data)) as unknown
@@ -1730,11 +1730,11 @@ async function selectCompleteZipBackup(entries: readonly UnzippedEntry[]): Promi
       if (siblingComplete) throw new Error(`The completed backup has an invalid manifest: ${entry.path}`)
       continue
     }
-    const declaresbbt-notes = isRecord(raw) && raw.format === MARKDOWN_BACKUP_FORMAT
-    if (legacyPath || declaresbbt-notes) manifestSeen = true
+    const declaresBbtai = isRecord(raw) && raw.format === MARKDOWN_BACKUP_FORMAT
+    if (legacyPath || declaresBbtai) manifestSeen = true
     const manifest = parseMarkdownBackupManifest(raw)
     if (!manifest) {
-      if (siblingComplete && declaresbbt-notes) {
+      if (siblingComplete && declaresBbtai) {
         throw new Error(`The completed backup has an invalid or unsupported manifest: ${entry.path}`)
       }
       continue

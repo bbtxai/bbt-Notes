@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto'
+﻿import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import type { Plugin } from 'vite'
@@ -48,9 +48,9 @@ type BuildAsset = {
 
 type BuildBundle = Record<string, BuildChunk | BuildAsset>
 
-export function bbt-notesPwa(): Plugin {
+export function inkstonePwa(): Plugin {
   return {
-    name: 'bbt-notes:pwa',
+    name: 'inkstone:pwa',
     apply: 'build',
     applyToEnvironment: (environment) => environment.name === 'client',
     generateBundle(_options, bundle) {
@@ -129,14 +129,14 @@ function isCoreLazyChunk(chunk: BuildChunk): boolean {
 
 function serviceWorkerSource(buildId: string, coreUrls: string[], allUrls: string[]): string {
 	return `const BUILD_ID = ${JSON.stringify(buildId)}
-	const SHELL_CACHE = ${JSON.stringify(`bbt-notes-shell-${buildId}`)}
-	const ASSET_CACHE = 'bbt-notes-assets-v1'
+	const SHELL_CACHE = ${JSON.stringify(`inkstone-shell-${buildId}`)}
+	const ASSET_CACHE = 'inkstone-assets-v1'
 	const CORE_URLS = ${JSON.stringify(coreUrls)}
 	const ALL_OFFLINE_URLS = ${JSON.stringify(allUrls)}
 	const OPTIONAL_URLS = ALL_OFFLINE_URLS.filter((url) => !CORE_URLS.includes(url))
 	const OPTIONAL_URL_SET = new Set(OPTIONAL_URLS)
-	const CACHE_META_URL = '/.bbt-notes-cache-meta'
-	const MANIFEST_META_PREFIX = '/.bbt-notes-offline-manifest/'
+	const CACHE_META_URL = '/.inkstone-cache-meta'
+	const MANIFEST_META_PREFIX = '/.inkstone-offline-manifest/'
 	const CURRENT_MANIFEST_URL = MANIFEST_META_PREFIX + BUILD_ID
 	const NETWORK_ONLY_EXACT_PATHS = ['/authorize', '/mcp']
 	const NETWORK_ONLY_PATH_PREFIXES = ['/api/', '/authorize/', '/mcp/', '/oauth/', '/.well-known/']
@@ -145,7 +145,7 @@ function serviceWorkerSource(buildId: string, coreUrls: string[], allUrls: strin
 self.addEventListener('install', (event) => {
   event.waitUntil((async () => {
     const previousShells = (await caches.keys()).filter((key) =>
-      key.startsWith('bbt-notes-shell-') && key !== SHELL_CACHE)
+      key.startsWith('inkstone-shell-') && key !== SHELL_CACHE)
     await cacheCoreResources()
     if (previousShells.length) await warmOfflineCache(false)
   })())
@@ -169,7 +169,7 @@ self.addEventListener('activate', (event) => {
   event.waitUntil((async () => {
     const keys = await caches.keys()
     await Promise.all(keys
-      .filter((key) => key.startsWith('bbt-notes-shell-') && key !== SHELL_CACHE)
+      .filter((key) => key.startsWith('inkstone-shell-') && key !== SHELL_CACHE)
       .map((key) => caches.delete(key)))
     await self.clients.claim()
   })())
@@ -358,3 +358,5 @@ async function broadcast(message) {
 }
 `
 }
+
+

@@ -153,11 +153,11 @@ async function selectLatestCompleteBackup(files: readonly File[]): Promise<Backu
       if (siblingComplete) throw new Error(t('settings.backup_manifest_invalid', { value0: path }))
       continue
     }
-    const declaresbbt-notes = isRecord(raw) && raw.format === MARKDOWN_BACKUP_FORMAT
-    if (legacyPath || declaresbbt-notes) manifestSeen = true
+    const declaresInkstone = isRecord(raw) && raw.format === MARKDOWN_BACKUP_FORMAT
+    if (legacyPath || declaresInkstone) manifestSeen = true
     const manifest = parseMarkdownBackupManifest(raw)
     if (!manifest) {
-      if (siblingComplete && declaresbbt-notes) {
+      if (siblingComplete && declaresInkstone) {
         throw new Error(t('settings.backup_manifest_invalid', { value0: path }))
       }
       continue

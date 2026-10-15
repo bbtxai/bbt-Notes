@@ -56,7 +56,7 @@ export interface McpAuthProps {
   scopes: string[]
 }
 
-export interface bbt-notesMcpServerOptions {
+export interface BbtaiMcpServerOptions {
   env: Env
   auth: McpAuthProps
   origin: string
@@ -77,7 +77,7 @@ const operationId = z.string().min(8).max(128).describe('Stable UUID or unique r
 const noteId = z.string().refine(isValidId, 'Invalid bbt-notes note id')
 const expectedRev = z.number().int().positive().describe('Current note rev returned by read_note or fetch')
 
-export function createbbt-notesMcpServer(options: bbt-notesMcpServerOptions): McpServer {
+export function createBbtaiMcpServer(options: BbtaiMcpServerOptions): McpServer {
   const server = new McpServer(
     { name: 'bbt-notes Knowledge Base', version: '1.0.0' },
     { instructions: INSTRUCTIONS },
@@ -955,7 +955,7 @@ export function createbbt-notesMcpServer(options: bbt-notesMcpServerOptions): Mc
 
 async function customTool(
   ctx: ServerContext,
-  options: bbt-notesMcpServerOptions,
+  options: BbtaiMcpServerOptions,
   callback: () => Promise<unknown>,
 ) {
   return safeTool(async () => {
@@ -967,7 +967,7 @@ async function customTool(
 
 async function writeTool(
   ctx: ServerContext,
-  options: bbt-notesMcpServerOptions,
+  options: BbtaiMcpServerOptions,
   scope: string,
   callback: () => Promise<unknown>,
 ) {

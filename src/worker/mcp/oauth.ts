@@ -6,12 +6,12 @@ import { initializeDatabase } from '../db/schema'
 import type { Env } from '../env'
 import { consumeAttemptBudget, ThrottleError } from '../lib/throttle'
 import { verifyMcpApiKey } from './api-keys'
-import { createbbt-notesMcpServer, type McpAuthProps } from './server'
+import { createBbtaiMcpServer, type McpAuthProps } from './server'
 import { isMcpEnabled, MCP_SUPPORTED_SCOPES } from './settings'
 
 const app = createApp()
 
-export class bbt-notesMcpApi extends WorkerEntrypoint<Env, McpAuthProps> {
+export class BbtaiMcpApi extends WorkerEntrypoint<Env, McpAuthProps> {
   async fetch(request: Request): Promise<Response> {
     const database = await initializeDatabase(this.env)
     if (!await isMcpEnabled(this.env.DB)) {
@@ -28,7 +28,7 @@ export class bbt-notesMcpApi extends WorkerEntrypoint<Env, McpAuthProps> {
     const origin = canonicalOrigin(request, this.env.PUBLIC_URL)
     const canonicalHost = new URL(origin).hostname
     const handler = createMcpHandler(
-      () => createbbt-notesMcpServer({
+      () => createBbtaiMcpServer({
         env: this.env,
         auth: { ...auth, role: user.role === 'owner' ? 'owner' : 'member' },
         origin,
@@ -72,7 +72,7 @@ function providerForOrigin(origin: string, env: Env): OAuthProvider<Env> {
   const mcpResource = `${origin}/mcp`
   return new OAuthProvider<Env>({
     apiRoute: '/mcp',
-    apiHandler: bbt-notesMcpApi,
+    apiHandler: BbtaiMcpApi,
     defaultHandler: {
       fetch(request, bindings, ctx) {
         return app.fetch(request, bindings, ctx)

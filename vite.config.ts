@@ -1,11 +1,11 @@
-import { fileURLToPath } from 'node:url'
+﻿import { fileURLToPath } from 'node:url'
 import type { Plugin, UserConfigFnPromise } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { bbt-notesPwa } from './pwa.config.ts'
+import { inkstonePwa } from './pwa.config.ts'
 
 const r = (p: string) => fileURLToPath(new URL(p, import.meta.url))
-const ephemeralDevState = process.env.bbt-notes_EPHEMERAL_DEV === '1'
+const ephemeralDevState = process.env.INKSTONE_EPHEMERAL_DEV === '1'
 
 const normalizeModuleId = (id: string) => id.replace(/\\/g, '/')
 
@@ -68,7 +68,7 @@ const config: UserConfigFnPromise = async ({ mode, command }) => ({
     react(),
     katexWoff2Only(),
     tailwindcss(),
-    bbt-notesPwa(),
+    inkstonePwa(),
     ...(mode === 'demo'
       ? []
       : [
@@ -147,3 +147,4 @@ const config: UserConfigFnPromise = async ({ mode, command }) => ({
 })
 
 export default config
+

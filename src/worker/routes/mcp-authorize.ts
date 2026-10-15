@@ -412,7 +412,7 @@ function loginPage(
 
       <form id="login" class="login-form">
         <section class="form-section" aria-labelledby="account-title">
-          <h2 id="account-title">${copy.bbt-notesAccount}</h2>
+          <h2 id="account-title">${copy.bbtaiAccount}</h2>
 
           <label class="field">
             <span>${copy.username}</span>
@@ -497,7 +497,7 @@ function errorPage(
       </section>
 
       <div class="actions">
-        <a class="primary link" href="/">${copy.openbbt-notes}</a>
+        <a class="primary link" href="/">${copy.openBbtai}</a>
       </div>
     </div>`,
     locale,
@@ -539,7 +539,7 @@ function authorizationCopy(locale: AppLocale) {
 
       signInTitle: (clientName: string) => `登录以授权 ${clientName}`,
       passwordOnly: '密码只会发送到当前 bbt-notes 部署。',
-      bbt-notesAccount: 'bbt-notes 账户',
+      bbtaiAccount: 'bbt-notes 账户',
       username: '用户名',
       password: '密码',
       signInContinue: '登录并继续',
@@ -547,7 +547,7 @@ function authorizationCopy(locale: AppLocale) {
       signInFailed: '登录失败',
 
       authorizationFailed: '授权失败',
-      openbbt-notes: '打开 bbt-notes',
+      openBbtai: '打开 bbt-notes',
       mcpDisabled: 'MCP 已在 bbt-notes 设置中停用。',
       unknownClient: '未知的 OAuth 客户端。',
       sessionExpired: 'bbt-notes 会话已过期，请登录后重试。',
@@ -586,7 +586,7 @@ function authorizationCopy(locale: AppLocale) {
 
     signInTitle: (clientName: string) => `Sign in to authorize ${clientName}`,
     passwordOnly: 'Your password is sent only to this bbt-notes deployment.',
-    bbt-notesAccount: 'bbt-notes account',
+    bbtaiAccount: 'bbt-notes account',
     username: 'Username',
     password: 'Password',
     signInContinue: 'Sign in and continue',
@@ -594,7 +594,7 @@ function authorizationCopy(locale: AppLocale) {
     signInFailed: 'Sign-in failed',
 
     authorizationFailed: 'Authorization failed',
-    openbbt-notes: 'Open bbt-notes',
+    openBbtai: 'Open bbt-notes',
     mcpDisabled: 'MCP is disabled in bbt-notes settings.',
     unknownClient: 'Unknown OAuth client.',
     sessionExpired: 'Your bbt-notes session expired. Sign in and try again.',

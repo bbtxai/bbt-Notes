@@ -1,6 +1,6 @@
 
 declare module 'node:crypto' {
-  interface bbt-notesScryptOptions {
+  interface InkstoneScryptOptions {
     N: number
     r: number
     p: number
@@ -11,7 +11,7 @@ declare module 'node:crypto' {
     password: string,
     salt: Uint8Array,
     keyLength: number,
-    options: bbt-notesScryptOptions,
+    options: InkstoneScryptOptions,
     callback: (error: Error | null, derivedKey: Uint8Array) => void,
   ): void
 }

@@ -1,7 +1,7 @@
 ﻿{
     "id":  "/",
-    "name":  "棒棒糖Ai",
-    "short_name":  "棒棒糖Ai",
+    "name":  "棒棒糖",
+    "short_name":  "棒棒糖",
     "description":  "私人自托管 Markdown 笔记",
     "lang":  "en-US",
     "start_url":  "/",
